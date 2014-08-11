@@ -5,22 +5,28 @@
 var stringifyJSON = function(obj) {
   // your code goes here
 
-  //console.log(typeof obj);
+  console.log(obj);
 
   if(typeof obj === 'object') {
-    console.log("We are working with an object");
-    if(obj === null) {return '' + null + '';}
+    console.log("We are working with an object...");
 
-    if(Array.isArray(obj)) {
+    if(obj === null) {
+      // Handle nulls
+      return '' + null + '';
+      }
+
+    else if(Array.isArray(obj)) {
+      // Handle arrays
       console.log("...which is also an array");
 
-      if(obj.length !== 0) {
 
+      if(obj.length !== 0) {
       var arrList = stringifyJSON(obj[0]);
 
       // Run function recursively for each element in array
       if(obj.length > 1) {
         for(var i=1;i<obj.length;i++) {
+          // Add a comma before all elements except the first
           arrList +=  ',' + stringifyJSON(obj[i]);
           }
         }
@@ -28,8 +34,19 @@ var stringifyJSON = function(obj) {
       }
 
      else {
+       // Handle empty arrays
       return '' + '[]' + '';
      }
+
+    }
+
+    else {
+      // Check if the object is empty
+      if(Object.getOwnPropertyNames(obj).length === 0){
+        console.log("This is an empty object.");
+        console.log('' + '{}' + '');
+      return '' + "{}" + '';
+    }
 
     }
 
