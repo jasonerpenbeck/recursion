@@ -3,12 +3,9 @@
 
 // but you don't so you're going to write it from scratch:
 var stringifyJSON = function(obj) {
-  // your code goes here
-
-  console.log(obj);
 
   if(typeof obj === 'object') {
-    console.log("We are working with an object...");
+//    console.log("We are working with an object...");
 
       // Handle nulls
     if(obj === null) {
@@ -17,7 +14,7 @@ var stringifyJSON = function(obj) {
 
       // Handle arrays
     else if(Array.isArray(obj)) {
-      console.log("...which is also an array");
+//      console.log("...which is also an array");
 
       // Check if array is empty
       if(obj.length !== 0) {
@@ -47,7 +44,7 @@ var stringifyJSON = function(obj) {
     else {
       // Check if the object is empty
       if(Object.getOwnPropertyNames(obj).length === 0){
-        console.log("This is an empty object.");
+//        console.log("This is an empty object.");
       return '' + "{}" + '';
       }
 
