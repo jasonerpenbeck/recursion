@@ -10,13 +10,13 @@ var stringifyJSON = function(obj) {
   if(typeof obj === 'object') {
     console.log("We are working with an object...");
 
-    if(obj === null) {
       // Handle nulls
+    if(obj === null) {
       return '' + null + '';
       }
 
-    else if(Array.isArray(obj)) {
       // Handle arrays
+    else if(Array.isArray(obj)) {
       console.log("...which is also an array");
 
 
@@ -40,26 +40,35 @@ var stringifyJSON = function(obj) {
 
     }
 
+
+    // basic objects
     else {
       // Check if the object is empty
       if(Object.getOwnPropertyNames(obj).length === 0){
         console.log("This is an empty object.");
-        console.log('' + '{}' + '');
       return '' + "{}" + '';
-    }
+      }
+
+      else {
+        for (var key in obj) {
+          return '{' + '"' + key + '"' + ':' + stringifyJSON(obj[key]) + '}';
+        }
+      }
 
     }
 
   }
 
+  // Non-objects
   else {
-    //console.log("'" + obj + "'");
 
+    // Undefined
     if(typeof obj === 'undefined') {
  //     console.log("type is undefined");
 
     }
 
+    // Strings
     else if(typeof obj === 'string') {
       return '"' + obj + '"';
     }
