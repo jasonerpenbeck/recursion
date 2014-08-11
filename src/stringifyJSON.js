@@ -19,8 +19,11 @@ var stringifyJSON = function(obj) {
     else if(Array.isArray(obj)) {
       console.log("...which is also an array");
 
-
+      // Check if array is empty
       if(obj.length !== 0) {
+
+      // Add first array element to arrList
+      // Doing this separately so that remaineder of elements can be preceded by a comma
       var arrList = stringifyJSON(obj[0]);
 
       // Run function recursively for each element in array
@@ -40,7 +43,6 @@ var stringifyJSON = function(obj) {
 
     }
 
-
     // basic objects
     else {
       // Check if the object is empty
@@ -50,9 +52,17 @@ var stringifyJSON = function(obj) {
       }
 
       else {
+
+        var objList = '';
+
         for (var key in obj) {
-          return '{' + '"' + key + '"' + ':' + stringifyJSON(obj[key]) + '}';
+          if (typeof obj[key] !== 'undefined' && typeof obj[key] !== 'function') {
+            objList += ',' + '"' + key + '"' + ':' + stringifyJSON(obj[key]);
+          }
         }
+
+        // returning full object after removing the leading comma
+        return '{' + objList.replace(',','') + '}';
       }
 
     }
@@ -63,9 +73,8 @@ var stringifyJSON = function(obj) {
   else {
 
     // Undefined
-    if(typeof obj === 'undefined') {
- //     console.log("type is undefined");
-
+    if(typeof obj === 'undefined' || typeof obj === 'function') {
+ //     console.log("type is undefined or a function");
     }
 
     // Strings
